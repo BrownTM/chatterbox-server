@@ -21,10 +21,14 @@ var defaultCorsHeaders = {
 var requestHandler = function(request, response) {
   // Request and Response come from node's http module.
   //
-  console.log(request);
+  console.log('REQUEST: ', request);
   // They include information about both the incoming request, such as
   // headers and URL, and about the outgoing response, such as its status
   // and content.
+  if (request.method === 'GET' && request.url === '/classes/messages') {
+    response.writeHead(200, defaultCorsHeaders);
+    response.end('Got it!');
+  }
   //
   // Documentation for both request and response can be found in the HTTP section at
   // http://nodejs.org/documentation/api/
