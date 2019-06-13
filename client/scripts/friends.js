@@ -9,7 +9,7 @@ var Friends = {
   //messages is our data array
   addUsers: function(messages) {
     messages.forEach(function(message) {
-      if (!Friends.usersStorage[message.username]) {
+      if (!Friends.usersStorage[message.username] && message !== undefined && message !== null) {
         Friends.usersStorage[message.username] = false;
       }
       if (Friends.usersStorage[message.username] === true) {

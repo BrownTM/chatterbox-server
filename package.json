@@ -31,6 +31,9 @@
     ]
   },
   "dependencies": {
-    "nodemon": "^1.19.1"
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.11",
+    "nodemon": "^1.19.1",
+    "underscore": "^1.9.1"
   }
 }

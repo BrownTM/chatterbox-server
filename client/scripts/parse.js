@@ -5,7 +5,8 @@ var Parse = {
   create: function(message, successCB, errorCB = null) {
     // todo: save a message to the server
     $.ajax({
-      url: 'http://127.0.0.1:3000/',
+      url: 'http://127.0.0.1:3000/classes/messages',
+      // url: Parse.server,
       type: 'POST',
       data: JSON.stringify(message),
       contentType: 'application/json',
@@ -18,7 +19,8 @@ var Parse = {
 
   readAll: function(successCB, errorCB = null) {
     $.ajax({
-      url: 'http://127.0.0.1:3000/',
+      url: 'http://127.0.0.1:3000/classes/messages',
+      // url: Parse.server,
       type: 'GET',
       data: { order: '-createdAt' },
       contentType: 'application/json',
