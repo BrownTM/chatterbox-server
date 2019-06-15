@@ -48,6 +48,36 @@ describe('server', function() {
     });
   });
 
+  // options test
+  it('should accept OPTIONS requests to /classes/messages', function(done) {
+    var requestParams = {method: 'OPTIONS',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Jono',
+        text: 'Do my bidding!'}
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(200);
+      done();
+    });
+  });
+
+  // different method test like DELETE
+  it('should error on DELETE request to /classes/messages', function(done) {
+    var requestParams = {method: 'DELETE',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Jono',
+        text: 'Do my bidding!'}
+    };
+
+    request(requestParams, function(error, response, body) {
+      expect(response.statusCode).to.equal(404);
+      done();
+    });
+  });
+
   it('should respond with messages that were previously posted', function(done) {
     var requestParams = {method: 'POST',
       uri: 'http://127.0.0.1:3000/classes/messages',

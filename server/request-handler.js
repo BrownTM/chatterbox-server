@@ -22,12 +22,10 @@ var defaultCorsHeaders = {
 defaultCorsHeaders['Content-Type'] = 'application/json';
 
 var messages = [];
-// {
-//   text: "this is the nerd server",
-//   username: "Batman"
-// }
+
 
 var sendResponse = function(statusCode, response) {
+  var statusCode = statusCode || 200;
   response.writeHead(statusCode, defaultCorsHeaders);
   // response.write();
   response.end(JSON.stringify({results: messages}));

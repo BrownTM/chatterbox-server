@@ -74,7 +74,6 @@ describe('Node Server Request Listener Function', function() {
     handler.requestHandler(req, res);
 
     var messages = JSON.parse(res._data);
-    console.log(res);
 
     // Expect 201 Created response status
     expect(messages.results).to.have.be.an('array');
@@ -123,10 +122,5 @@ describe('Node Server Request Listener Function', function() {
     expect(res._responseCode).to.equal(404);
     expect(res._ended).to.equal(true);
   });
-
-  // additional test
-  
-
-
 
 });
