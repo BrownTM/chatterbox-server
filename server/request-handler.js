@@ -29,17 +29,15 @@ var messages = [];
 
 var sendResponse = function(statusCode, response) {
   response.writeHead(statusCode, defaultCorsHeaders);
-  // console.log('MESSAGES: ', messages);
   // response.write();
   response.end(JSON.stringify({results: messages}));
-  // response.end(JSON.stringify({results: messages}));
-  // console.log('RESPONSE AFTER SENDRESPONSE CALLED: ', response);
+
 };
 
 var collectDataFunc = function(request, callback) {
-  var data = [];
+  var data = '';
   request.on('data', function(chunk) {
-    data.push(chunk);
+    data = data + chunk;
   });
   request.on('end', function() {
     callback(JSON.parse(data));
@@ -47,16 +45,9 @@ var collectDataFunc = function(request, callback) {
 }
 
 var requestHandler = function(request, response) {
-  // Request and Response come from node's http module.
-  //
+
   var nerdServer = url.parse(request.url);
-  // request.on('data', (chunk) => {
-  //   messages.push(chunk);
-  // });
-  // console.log('REQUEST: ', request.url.pathname);
-  // They include information about both the incoming request, such as
-  // headers and URL, and about the outgoing response, such as its status
-  // and content.
+
   if (request.method === 'GET' && nerdServer.pathname === '/classes/messages') {
     sendResponse(200, response);
   } else if (request.method === 'POST' && nerdServer.pathname === '/classes/messages') {

@@ -55,16 +55,23 @@ describe('Node Server Request Listener Function', function() {
     };
     var req = new stubs.request('/classes/messages', 'POST', stubMsg);
     var res = new stubs.response();
+    // console.log('RES HERE ---->', res);
 
     handler.requestHandler(req, res);
 
+    var messages = JSON.parse(res._data);
+    console.log(res);
+
     // Expect 201 Created response status
+    expect(messages.results).to.have.be.an('array');
+    expect(messages.results[0]).to.have.property('username');
+    expect(messages.results[0]).to.have.property('text');
     expect(res._responseCode).to.equal(201);
+    expect(res._ended).to.equal(true);
 
     // Testing for a newline isn't a valid test
     // TODO: Replace with with a valid test
     // expect(res._data).to.equal(JSON.stringify('\n'));
-    expect(res._ended).to.equal(true);
   });
 
   it('Should respond with messages that were previously posted', function() {
