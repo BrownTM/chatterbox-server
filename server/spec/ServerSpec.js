@@ -48,6 +48,20 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
+  // additional test
+  it('Should send an empty `result` array' , function() {
+    var req = new stubs.request('/classes/messages', 'GET');
+    var res = new stubs.response();
+
+    handler.requestHandler(req, res);
+
+    var parsedBody = JSON.parse(res._data);
+    expect(parsedBody).to.have.property('results');
+    expect(parsedBody.results).to.be.an('array');
+    expect(parsedBody.results.length).to.be.equal(0);
+    expect(res._ended).to.equal(true);
+  });
+
   it('Should accept posts to /classes/messages', function() {
     var stubMsg = {
       username: 'Jono',
@@ -109,5 +123,10 @@ describe('Node Server Request Listener Function', function() {
     expect(res._responseCode).to.equal(404);
     expect(res._ended).to.equal(true);
   });
+
+  // additional test
+  
+
+
 
 });
