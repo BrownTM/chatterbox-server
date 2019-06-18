@@ -27,9 +27,7 @@ var messages = [];
 var sendResponse = function(statusCode, response) {
   var statusCode = statusCode || 200;
   response.writeHead(statusCode, defaultCorsHeaders);
-  // response.write();
   response.end(JSON.stringify({results: messages}));
-
 };
 
 var collectDataFunc = function(request, callback) {
@@ -39,8 +37,8 @@ var collectDataFunc = function(request, callback) {
   });
   request.on('end', function() {
     callback(JSON.parse(data));
-  })
-}
+  });
+};
 
 var requestHandler = function(request, response) {
 
@@ -52,8 +50,7 @@ var requestHandler = function(request, response) {
     collectDataFunc(request, function(message) {
       messages.push(message);
       sendResponse(201, response);
-    })
-    // messages.push(request._postData);
+    });
   } else if (request.method === 'OPTIONS' && nerdServer.pathname === '/classes/messages') {
     sendResponse(200, response);
   } else {
