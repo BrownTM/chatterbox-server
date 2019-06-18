@@ -42,7 +42,6 @@ describe('server', function() {
     };
 
     request(requestParams, function(error, response, body) {
-      // console.log('BODY', body);
       expect(response.statusCode).to.equal(201);
       done();
     });
@@ -88,10 +87,8 @@ describe('server', function() {
 
     request(requestParams, function(error, response, body) {
       // Now if we request the log, that message we posted should be there:
-      // console.log('1st Body', body);
       request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
         var messages = JSON.parse(body).results;
-        // console.log('2nd Body', body);
         expect(messages[0].username).to.equal('Jono');
         expect(messages[0].text).to.equal('Do my bidding!');
         done();
